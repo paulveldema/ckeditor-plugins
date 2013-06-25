@@ -11,7 +11,7 @@
  *                   CKEDITOR.replace('somename', { , maximizedToolbar: 'yourtoolbarname', });
  *               
  *               TODO:
- *                - fix the buttons that no longer fuction after maximize (like the color button)
+ *                - fix the buttons that no longer function after maximize (like the color button)
  *                - fix that this works nicely with the resizewithwindow plugin.
  *               
  *               Inspired by http://stackoverflow.com/questions/12531002/change-ckeditor-toolbar-dynamically
