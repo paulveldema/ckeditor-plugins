@@ -7,8 +7,8 @@
  * @fileOverview The "toolbarswitch" plugin profides the ability use a
  *               different  (larger) toolbar when the editor is maximized.  
  *               
- *               Select the toolbar to use in maximized mode by:
- *                   CKEDITOR.replace('somename', { , maximizedToolbar: 'yourtoolbarname', });
+ *               Add the toolbar for maximized mode by:
+ *                   CKEDITOR.replace('sometextcomponent', { toolbar: 'yoursmalltoolbarname', maximizedToolbar: 'yourbigtoolbarname' });
  *               
  *               TODO:
  *                - fix the buttons that no longer function after maximize (like the color button)
