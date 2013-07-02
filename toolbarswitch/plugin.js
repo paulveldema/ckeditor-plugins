@@ -10,10 +10,20 @@
  *               Add the toolbar for maximized mode by:
  *                   CKEDITOR.replace('sometextcomponent', { toolbar: 'yoursmalltoolbarname', maximizedToolbar: 'yourbigtoolbarname' });
  *               
- *               TODO:
- *                - fix the buttons that no longer function after maximize (like the color button)
- *                - fix that this works nicely with the resizewithwindow plugin.
+ *               Requires:
+ *                - patch on panelbutton plugin.js from ticket 7280 to Store/Restore a copy of the panel definition.
  *               
+ *               TODO:
+ *                - fix the buttons that no longer function after switching the toolbar:
+ *                  . the 4 text alignment buttons (center, left, right, fill)
+ *                  . the smiley button
+ *                  . 3 of the text style buttons (strike, superscript, subscript)
+ *                  . the quote block button
+ *                  . the link and unlink buttons
+ *                  . the horizontal line button
+ *                  . the table button
+ *                  . the image button
+ *                  
  *               Inspired by http://stackoverflow.com/questions/12531002/change-ckeditor-toolbar-dynamically
  */
 
