@@ -23,7 +23,7 @@
  *                  . the horizontal line button
  *                  . the table button
  *                  . the image button
- *                - fix working that this plugin works nicely with the resizewithwindow plugin.
+ *                - fix that this plugin works nicely with the resizewithwindow plugin.
  *                  With IE10 right after using the maximize/minimize button the heights are incorrect.
  *                  Resizing the window corrects this but the heights should be correct all the time.
  *                  With Chrome and firefox there is no problem.
