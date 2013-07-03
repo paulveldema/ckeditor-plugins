@@ -23,6 +23,7 @@
  *                  . the horizontal line button
  *                  . the table button
  *                  . the image button
+ *                - fix working that this plugin works nicely with the resizewithwindow plugin under IE10 (works correctly with chrome and firfox) 
  *                  
  *               Inspired by http://stackoverflow.com/questions/12531002/change-ckeditor-toolbar-dynamically
  */
