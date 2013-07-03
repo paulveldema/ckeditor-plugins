@@ -23,7 +23,10 @@
  *                  . the horizontal line button
  *                  . the table button
  *                  . the image button
- *                - fix working that this plugin works nicely with the resizewithwindow plugin under IE10 (works correctly with chrome and firfox) 
+ *                - fix working that this plugin works nicely with the resizewithwindow plugin.
+ *                  With IE10 right after using the maximize/minimize button the heights are incorrect.
+ *                  Resizing the window corrects this but the heights should be correct all the time.
+ *                  With Chrome and firefox there is no problem.
  *                  
  *               Inspired by http://stackoverflow.com/questions/12531002/change-ckeditor-toolbar-dynamically
  */
