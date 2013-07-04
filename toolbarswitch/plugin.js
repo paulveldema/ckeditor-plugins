@@ -12,6 +12,7 @@
  *               
  *               Requires:
  *                - patch on panelbutton plugin.js from ticket 7280 to Store/Restore a copy of the panel definition.
+ *                - Patch on maximize plugin to fix null error on 'var buttonNode' that only occurs when switching toolbars.
  *               
  *               TODO:
  *                - fix the buttons that no longer function after switching the toolbar:
@@ -23,10 +24,6 @@
  *                  . the horizontal line button
  *                  . the table button
  *                  . the image button
- *                - fix that this plugin works nicely with the resizewithwindow plugin.
- *                  With IE10 right after using the maximize/minimize button the heights are incorrect.
- *                  Resizing the window corrects this but the heights should be correct all the time.
- *                  With Chrome and firefox there is no problem.
  *                  
  *               Inspired by http://stackoverflow.com/questions/12531002/change-ckeditor-toolbar-dynamically
  */
