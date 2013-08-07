@@ -69,13 +69,15 @@ CKEDITOR.plugins.add( 'resizewithwindow', {
 			
 			// Browser quirks: this correction prevents a vertical scroll bar in the window.
 			var extraheightCorrection = 8;
-			if ( jQuery.browser.mozilla ) {
+			var htmlStyle = document.documentElement.style;
+			
+			if ( 'mozAppearance' in htmlStyle ) {
 				extraheightCorrection = 11;
 			}
-			if ( jQuery.browser.webkit ) {
+			if ( 'webkitAppearance' in htmlStyle ) {
 				extraheightCorrection = 12;
 			}
-			if ( jQuery.browser.msie ) {
+			if ( 'behavior' in htmlStyle || '-ms-scroll-limit' in htmlStyle ) {
 				extraheightCorrection = 10;
 			}
 			baseEditorInnerGrey.height( referencedheight - extraheightCorrection );
