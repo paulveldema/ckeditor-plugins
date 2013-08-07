@@ -71,10 +71,10 @@ CKEDITOR.plugins.add( 'resizewithwindow', {
 			var extraheightCorrection = 8;
 			var htmlStyle = document.documentElement.style;
 			
-			if ( 'mozAppearance' in htmlStyle ) {
+			if ( 'MozAppearance' in htmlStyle ) {
 				extraheightCorrection = 11;
 			}
-			if ( 'webkitAppearance' in htmlStyle ) {
+			if ( 'WebkitAppearance' in htmlStyle ) {
 				extraheightCorrection = 12;
 			}
 			if ( 'behavior' in htmlStyle || '-ms-scroll-limit' in htmlStyle ) {
