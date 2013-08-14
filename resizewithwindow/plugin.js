@@ -97,6 +97,7 @@ CKEDITOR.plugins.add( 'resizewithwindow', {
 			}
 			var newHeight = referencedheight - ( toolbarHeight + heightCorrection );
 			content.height( newHeight + "px" );
+			content.find('iframe:first').width( "100%" );
 		}
 	}
 });
