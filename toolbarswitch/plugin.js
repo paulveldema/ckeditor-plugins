@@ -99,7 +99,7 @@ CKEDITOR.plugins.add('toolbarswitch', {
 		editor.ui.addButton && editor.ui.addButton( 'Toolbarswitch', {
 			label: lang.toolbarswitch.toolbarswitch,
 			command: 'toolbarswitch',
-			toolbar: 'tools'
+			toolbar: 'tools,10'
 		});
 	}
 });
