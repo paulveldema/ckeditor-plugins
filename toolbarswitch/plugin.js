@@ -4,66 +4,102 @@
  */
 
 /**
- * @fileOverview The "toolbarswitch" plugin profides the ability use a
- *               different  (larger) toolbar when the editor is maximized.  
+ * @fileOverview  Plugin that changes the toolbar and maximizes the editor 
+ *                for the big toolbar.
+ * 
+ *                You need a custom config to define the small and big toolbars.
+ *                Also the maximize plug-in is needed but not the maximize button.
+ *                For this plugin you should use the 'Toolbarswitch' button instead.
+ * 
+ *                CKEDITOR.replace('sometextcomponentname', {
+ *               		customConfig: '/...custom_ckeditor_config.js'
+ *               		toolbar: 'yoursmalltoolbarname', 
+ *               		smallToolbar: 'yoursmalltoolbarname',
+ *               		maximizedToolbar: 'yourbigtoolbarname' });
  *               
- *               Add the toolbar for maximized mode by:
- *                   CKEDITOR.replace('sometextcomponent', { toolbar: 'yoursmalltoolbarname', maximizedToolbar: 'yourbigtoolbarname' });
- *               
- *               Requires:
- *                - patch on panelbutton plugin.js from ticket 7280 to Store/Restore a copy of the panel definition.
- *                - Patch on maximize plugin to fix null error on 'var buttonNode' that only occurs when switching toolbars.
- *               
- *               TODO:
- *                - fix the buttons that no longer function after switching the toolbar:
- *                  . the 4 text alignment buttons (center, left, right, fill)
- *                  . the smiley button
- *                  . 3 of the text style buttons (strike, superscript, subscript)
- *                  . the quote block button
- *                  . the link and unlink buttons
- *                  . the horizontal line button
- *                  . the table button
- *                  . the image button
- *                  
- *               Inspired by http://stackoverflow.com/questions/12531002/change-ckeditor-toolbar-dynamically
+ *                Requires JQuery
  */
 
-(function() {
-	
-	CKEDITOR.editor.prototype.loadToolbar = function(tbName) {
-		// If the 'themeSpace' event doesn't exist, load the toolbar plugin
-		if ( !this._.events.themeSpace ) {
-			CKEDITOR.plugins.registered.toolbar.init(this);
-			// causes themeSpace event to be listened to.
-		}
-		// If a different toolbar was specified use it, otherwise just reload
-		if ( tbName ) this.config.toolbar = tbName;
 
-		// themeSpace event returns a object with the toolbar HTML in it
-		var obj = this.fire( 'uiSpace', { space: 'top', html: '' } );
+function switchMe(editor, callback) {
 
-		// Replace the toolbar HTML 
-		var tbEleId = this.ui.spaceId( 'top' );
-		var tbEle = document.getElementById(tbEleId);
-		tbEle.innerHTML = obj.html;
+	var origCustomConfig = editor.config.customConfig;
+	var origContentCss = editor.config.contentCss;
+	var origExtraPlugins = editor.config.extraPlugins;
+
+	var origToolbar =  editor.config.toolbar;
+	var origSmallToolbar = editor.config.smallToolbar;
+	var origMaximizedToolbar = editor.config.maximizedToolbar;
+	var newToolbar;
+	if (origToolbar == origSmallToolbar) {
+		newToolbar = origMaximizedToolbar;
+	} else {
+		newToolbar = origSmallToolbar;
 	}
-
-})();
-
-CKEDITOR.plugins.add( 'toolbarswitch', {
-	requires: [ 'button', 'toolbar' ],
 	
-	init: function( editor ) {
-		var _initialToolbar = editor.config.toolbar;
+	// Copy data to original text element before getting rid of the old editor
+	var data = editor.getData();
+	var domTextElement = editor.element.$;
+	jQuery(domTextElement).val(data);
 	
-		editor.on( 'beforeCommandExec', function( ev ) {
-			if ( ev.data.name == 'maximize' ) {
-				if ( editor.config.toolbar == _initialToolbar ) {
-					editor.loadToolbar( editor.config.maximizedToolbar );
-				} else {
-					editor.loadToolbar( _initialToolbar );
+	// Remove old editor and the DOM elements, else you get two editors
+	var id = domTextElement.id;
+	CKEDITOR.remove(editor);
+	jQuery('#cke_' + id).remove();
+
+	CKEDITOR.replace(id, {
+		customConfig : origCustomConfig,
+		contentsCss : origContentCss,
+		toolbar : newToolbar,
+		smallToolbar: origSmallToolbar,
+		maximizedToolbar: origMaximizedToolbar,
+		extraPlugins : origExtraPlugins,
+		on: {
+			instanceReady: function(e) {
+				CKeditor_OnComplete(e.editor);
+				if (callback) {
+					callback.call(null, e);
 				}
 			}
+		}
+	});
+}
+
+CKEDITOR.plugins.add('toolbarswitch', {
+	requires: [ 'button', 'toolbar', 'maximize' ],
+
+	init: function (editor) {
+
+		var commandFunction = {
+			exec: function( editor ) {
+				if ( editor.config.toolbar == editor.config.maximizedToolbar ) {
+					// For switching to the small toolbar first minimize
+					editor.commands.maximize.exec();
+					switchMe(editor, function(e){
+						var newEditor = e.editor;
+						newEditor.fire('triggerResize');
+					});
+				} else {
+					switchMe(editor, function(e){
+						var newEditor = e.editor;
+						newEditor.commands.maximize.exec();
+						newEditor.fire('triggerResize');
+					});
+				}
+			}
+		}
+
+		var command = editor.addCommand( 'toolbarswitch', commandFunction );
+		command.modes = { wysiwyg:1,source:1 };
+		command.canUndo = false;
+		command.readOnly = 1;
+
+		editor.ui.addButton && editor.ui.addButton( 'Toolbarswitch', {
+			label: 'Toolbarswitch',
+			command: 'toolbarswitch',
+			toolbar: 'tools',
+			icon: CKEDITOR.skin.path() + 'icons/maximize.png'
 		});
 	}
 });
+
