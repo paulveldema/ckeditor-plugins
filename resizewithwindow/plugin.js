@@ -104,7 +104,9 @@ CKEDITOR.plugins.add( 'resizewithwindow', {
 				// Otherwise the characters of the wordcount component will not
 				// stay within the grey (in case of the kama skin) background
 				// component.
-				heightCorrection += 7;
+				if (!usesMoono) {
+					heightCorrection += 7;
+				}
 			}
 			var newHeight = referencedheight - ( toolbarHeight + heightCorrection );
 			content.height( newHeight + "px" );
