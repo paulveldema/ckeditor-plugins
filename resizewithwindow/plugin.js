@@ -70,7 +70,8 @@ CKEDITOR.plugins.add( 'resizewithwindow', {
 			// Browser quirks: this correction prevents a vertical scroll bar in the window.
 			var extraheightCorrection = 8;
 			var htmlStyle = document.documentElement.style;
-			if (editor.config.skin.indexOf( 'moono' ) > -1) {
+			var usesMoono = (editor.config.skin.indexOf( 'moono' ) > -1);
+			if (usesMoono) {
 				if ( 'MozAppearance' in htmlStyle || 'WebkitAppearance' in htmlStyle) {
 					extraheightCorrection = 3;
 				}
@@ -94,7 +95,7 @@ CKEDITOR.plugins.add( 'resizewithwindow', {
 			// The text area height depends on the enabling of the charcount plugin.
 			// Correct the height of the text area in java script because css does not work.
 			var heightCorrection = 13;
-			if (editor.config.skin.indexOf( 'moono' ) > -1) {
+			if (usesMoono) {
 				heightCorrection = 3;
 			}
 			if ( editor.config.extraPlugins.indexOf( 'wordcount' ) > -1 ) {
