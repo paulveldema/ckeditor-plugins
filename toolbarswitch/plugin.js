@@ -17,7 +17,14 @@
  *               		smallToolbar: 'yoursmalltoolbarname',
  *               		maximizedToolbar: 'yourbigtoolbarname' });
  *               
- *                Requires JQuery
+ *                Requires:
+ *                - Maximize plugin. But not the button that goes with it. 
+ *                - All toolbars used in the ckeditor instance have to use the 'Toolbarswitch' button instead.
+ *                - A custom config to define the small and big toolbars.
+ *                - function CKeditor_OnComplete(ckEditorInstance){ ... your own custom code or leave empty... }
+ *                  This was added to the plugin for those that wrap the ckeditor in other java script to shield 
+ *                  the rest of their code from ckeditor version particularities.
+ *                - jQuery
  */
 
 
