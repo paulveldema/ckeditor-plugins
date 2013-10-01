@@ -51,8 +51,7 @@ function switchMe(editor, callback) {
 	
 	// Remove old editor and the DOM elements, else you get two editors
 	var id = domTextElement.id;
-	CKEDITOR.remove(editor);
-	jQuery('#cke_' + id).remove();
+	editor.destroy(true);
 
 	CKEDITOR.replace(id, {
 		customConfig : origCustomConfig,
