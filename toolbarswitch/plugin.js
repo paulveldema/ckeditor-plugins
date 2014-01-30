@@ -31,7 +31,7 @@
 function switchMe(editor, callback) {
 
 	var origCustomConfig = editor.config.customConfig;
-	var origContentCss = editor.config.contentCss;
+	var origContentCss = editor.config.contentsCss;
 	var origExtraPlugins = editor.config.extraPlugins;
 
 	var origToolbar =  editor.config.toolbar;
