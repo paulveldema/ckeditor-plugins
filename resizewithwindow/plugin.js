@@ -22,6 +22,7 @@
 
 CKEDITOR.plugins.add( 'resizewithwindow', {
 	init: function( editor ) {
+		var element = editor.element;
 		var baseEditorInnerGrey;
 		
 		editor.on( 'instanceReady', function() {
@@ -58,7 +59,7 @@ CKEDITOR.plugins.add( 'resizewithwindow', {
 			if ( maximizestate == CKEDITOR.TRISTATE_ON ) {
 				referencedheight = jQuery( window ).height();
 			} else {
-				var textarea = editor.element.$;
+				var textarea = element.$;
 				var editorFrame = jQuery( textarea ).parents( "div:first" ); 
 				baseEditorInnerGrey = jQuery( ".cke_inner", editorFrame );
 				referencedheight = editorFrame.height();
