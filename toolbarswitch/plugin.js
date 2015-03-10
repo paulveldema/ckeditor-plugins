@@ -34,6 +34,9 @@ function switchMe(editor, callback) {
 	var origContentCss = editor.config.contentsCss;
 	var origExtraPlugins = editor.config.extraPlugins;
 
+	var origMinToolbar = ckeditor.config.toolbar_minToolbar;
+	var origMaxToolbar = ckeditor.config.toolbar_maxToolbar;
+
 	var origToolbar =  editor.config.toolbar;
 	var origSmallToolbar = editor.config.smallToolbar;
 	var origMaximizedToolbar = editor.config.maximizedToolbar;
@@ -56,6 +59,8 @@ function switchMe(editor, callback) {
 	CKEDITOR.replace(id, {
 		customConfig : origCustomConfig,
 		contentsCss : origContentCss,
+		toolbar_minToolbar: origMinToolbar,
+		toolbar_maxToolbar: origMaxToolbar,
 		toolbar : newToolbar,
 		smallToolbar: origSmallToolbar,
 		maximizedToolbar: origMaximizedToolbar,
