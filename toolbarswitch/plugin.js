@@ -67,7 +67,9 @@ function switchMe(editor, callback) {
 		extraPlugins : origExtraPlugins,
 		on: {
 			instanceReady: function(e) {
-				CKeditor_OnComplete(e.editor);
+				if (typeof CKeditor_OnComplete !== 'undefined') {
+					CKeditor_OnComplete(e.editor);
+				}
 				if (callback) {
 					callback.call(null, e);
 				}
